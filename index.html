@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDM Register</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.box{
+    background:#222;
+    padding:20px;
+    width:300px;
+    margin:auto;
+    border-radius:10px;
+}
+
+input,button{
+    width:90%;
+    padding:10px;
+    margin:10px 0;
+    border:none;
+    border-radius:5px;
+}
+
+button{
+    background:gold;
+    cursor:pointer;
+}
+
+.player{
+    background:#333;
+    margin:5px auto;
+    padding:8px;
+    width:300px;
+    border-radius:5px;
+}
+
+#players{
+    display:none;
+    margin-top:20px;
+}
+
+/* 📱 MOBILE RESPONSIVE */
+@media (max-width: 600px){
+    .box{
+        width:90%;
+    }
+
+    .player{
+        width:90%;
+    }
+
+    input,button{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Tdm Register</h2>
+
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="text" id="pid" placeholder="Enter ID">
+    <input type="text" id="tg" placeholder="Telegram username">
+
+    <button onclick="registerPlayer()">Register</button>
+    <button onclick="showPlayers()">Show Players</button>
+</div>
+
+<div id="players"></div>
+
+<script>
+let players = [];
+
+function registerPlayer(){
+    let name = document.getElementById("name").value;
+    let pid = document.getElementById("pid").value;
+    let tg = document.getElementById("tg").value;
+
+    if(name==="" || pid==="" || tg===""){
+        alert("Fill all fields");
+        return;
+    }
+
+    players.push({name, pid, tg});
+
+    document.getElementById("name").value="";
+    document.getElementById("pid").value="";
+    document.getElementById("tg").value="";
+
+    alert("Registered!");
+}
+
+function showPlayers(){
+    let playersDiv = document.getElementById("players");
+    playersDiv.innerHTML = "<h2>Registered Players</h2>";
+
+    players.forEach(player=>{
+        playersDiv.innerHTML += `
+            <div class="player">
+                ${player.name} - ${player.pid} - @${player.tg}
+            </div>
+        `;
+    });
+
+    playersDiv.style.display = "block";
+}
+</script>
+
+</body>
+</html>
